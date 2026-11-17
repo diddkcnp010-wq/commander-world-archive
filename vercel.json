@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "headers": [
+    {
+      "source": "/audio/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60, must-revalidate"
+        },
+        {
+          "key": "Accept-Ranges",
+          "value": "bytes"
+        }
+      ]
+    }
+  ]
+}
