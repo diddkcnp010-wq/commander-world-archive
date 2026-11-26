@@ -5,6 +5,7 @@
   const tracks=new Map();
   const audio=document.getElementById('persistent-world-audio');
   audio.loop=true;
+  audio.preload='none';
   const repeatToggle=document.getElementById('music-repeat');
   repeatToggle?.addEventListener('click',()=>{audio.loop=!audio.loop;repeatToggle.textContent=audio.loop?'↻ 반복 ON':'↻ 반복 OFF';repeatToggle.setAttribute('aria-pressed',String(audio.loop));repeatToggle.title=audio.loop?'반복 재생 켜짐':'반복 재생 꺼짐';});
   const dock=document.getElementById('music-dock');
@@ -53,6 +54,9 @@
   }
   const duration=()=>{const track=tracks.get(key);return Number.isFinite(audio.duration)&&audio.duration>0?audio.duration:(track?.fallback||0)};
   const selected=()=>tracks.get(key);
+  const songButtons=new Map([...document.querySelectorAll('.song-card button[data-song]')].map(b=>[b.dataset.song,b]));
+  let lastRenderedKey=null;
+  const putText=(el,v)=>{if(el&&el.textContent!==v)el.textContent=v};
   function panel(open){dockPanel.hidden=!open;dockToggle.setAttribute('aria-expanded',String(open));dock.classList.toggle('is-open',open)}
   function update(){
     const active=selected(); if(!active)return;
@@ -68,7 +72,8 @@
     miniSec.textContent=Math.floor(t)+'초';miniState.textContent=status;
     miniSeek.max=String(d||1);miniSeek.value=String(Math.min(t,d));miniSeek.style.setProperty('--pct',pct+'%');
     miniPlay.textContent=playing?'Ⅱ':'▶';miniPlay.setAttribute('aria-label',playing?'음악 일시정지':'음악 재생');
-    for(const track of tracks.values()){
+    const renderTracks=lastRenderedKey===null?[...tracks.values()]:[...new Set([tracks.get(key),tracks.get(lastRenderedKey)])].filter(Boolean);
+    for(const track of renderTracks){
       const current=track.key===key;
       const time=current?t:0,total=current?d:track.fallback;
       if(track.play) track.play.textContent=current&&playing?'Ⅱ 일시정지':'▶ 재생';
@@ -77,9 +82,10 @@
       if(track.state) track.state.textContent=current?status:'재생 버튼을 누르세요';
       if(track.seek){track.seek.max=String(total||1);track.seek.value=String(Math.min(time,total));track.seek.style.setProperty('--pct',current?pct+'%':'0%')}
       track.box.dataset.playing=current&&playing?'yes':'no';
-      const b=document.querySelector('.song-card button[data-song="'+track.key+'"]');
+      const b=songButtons.get(track.key);
       if(b){b.textContent=current&&playing?'Ⅱ 일시정지':'▶ 재생';b.closest('.song-card')?.classList.toggle('playing',current&&playing)}
     }
+    lastRenderedKey=key;
   }
   function selectTrack(next){
     if(!tracks.has(next))return false;
@@ -161,23 +167,27 @@
    for(const id of sections){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=180)current=id;}
    navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
  }
- window.addEventListener('scroll',setNav,{passive:true});setNav();
+ let navQueued=false;window.addEventListener('scroll',()=>{if(navQueued)return;navQueued=true;requestAnimationFrame(()=>{navQueued=false;setNav()})},{passive:true});setNav();
  document.querySelector('[data-expand="hunters"]')?.addEventListener('click',e=>{
-  const section=document.getElementById('hunters'),all=Array.from(section.querySelectorAll('details'));
+  const section=document.getElementById('hunters'),all=Array.from(section.querySelectorAll('details.root, details.group'));
   const open=all.some(d=>!d.open);all.forEach(d=>d.open=open);
-  e.currentTarget.textContent=open?'모두 접기':'모두 펼치기';
+  if(!open)section.querySelectorAll('details.char[open]').forEach(d=>d.open=false);
+  e.currentTarget.textContent=open?'분류 모두 접기':'분류 모두 펼치기';
  });
  const dlg=document.getElementById('search-dialog'),inp=document.getElementById('search-query'),results=document.getElementById('search-results');
  const searchables=[];
+ let indexed=false;
+ function indexSearch(){if(indexed)return;indexed=true;
  document.querySelectorAll('details.char,details.boss-character,details.region-character,details.creature-character').forEach(el=>{
    const label=el.querySelector(':scope > summary')?.textContent.replace(/\s+/g,' ').trim()||'';
    const kind=el.matches('.char')?'토벌자':el.matches('.boss-character')?'재앙체':el.matches('.creature-character')?'크리처':'지역';
    const code=el.querySelector('.code')?.textContent.trim()||el.dataset.code||el.dataset.region||'';
    searchables.push({el,kind,code,label});
- });
+ });}
  function search(text){
    results.innerHTML='';const q=text.trim().toLocaleLowerCase();
    if(!q){results.innerHTML='<div class="search-empty">이름이나 지역 코드를 입력해 주세요.</div>';return;}
+   indexSearch();
    const items=searchables.filter(x=>(x.label+' '+x.code).toLocaleLowerCase().includes(q)).slice(0,16);
    if(!items.length){results.innerHTML='<div class="search-empty">검색 결과가 없어요.</div>';return;}
    items.forEach(x=>{const b=document.createElement('button');b.type='button';b.className='search-result';
@@ -278,7 +288,7 @@
 (function(){
  const progress=document.getElementById('scroll-progress');
  const update=()=>{if(!progress)return;const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%'};
- window.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update,{passive:true});update();
+ let progressQueued=false;const queueProgress=()=>{if(progressQueued)return;progressQueued=true;requestAnimationFrame(()=>{progressQueued=false;update()})};window.addEventListener('scroll',queueProgress,{passive:true});window.addEventListener('resize',queueProgress,{passive:true});update();
  const canAnimate=!(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
  if(!canAnimate)return;
  if('IntersectionObserver' in window){
@@ -286,7 +296,5 @@
    document.documentElement.classList.add('js-animate');
    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
  }
- document.querySelectorAll('.archive-fold details.root, .archive-fold details.group').forEach(d=>{
-   d.addEventListener('toggle',()=>{if(d.open){const content=d.querySelector(':scope > .root-content, :scope > .group-content');if(content){content.style.animation='none';void content.offsetWidth;content.style.animation=''}}});
- });
+ // Folder animations deliberately disabled: avoid forced layout on each toggle.
 })();
