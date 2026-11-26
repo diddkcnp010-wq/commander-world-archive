@@ -153,10 +153,10 @@
  }
  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{
   const dest=a.getAttribute('href').slice(1);
-  if(['hunters','regions'].includes(dest))revealSection(dest);
+  if(['hunters','regions','creatures'].includes(dest))revealSection(dest);
  }));
  function setNav(){
-   const sections=['home','hunters','calamities','regions','music'];
+   const sections=['home','hunters','calamities','regions','creatures','music'];
    let current='home';
    for(const id of sections){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=180)current=id;}
    navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
@@ -169,9 +169,9 @@
  });
  const dlg=document.getElementById('search-dialog'),inp=document.getElementById('search-query'),results=document.getElementById('search-results');
  const searchables=[];
- document.querySelectorAll('details.char,details.boss-character,details.region-character').forEach(el=>{
+ document.querySelectorAll('details.char,details.boss-character,details.region-character,details.creature-character').forEach(el=>{
    const label=el.querySelector(':scope > summary')?.textContent.replace(/\s+/g,' ').trim()||'';
-   const kind=el.matches('.char')?'토벌자':el.matches('.boss-character')?'재앙체':'지역';
+   const kind=el.matches('.char')?'토벌자':el.matches('.boss-character')?'재앙체':el.matches('.creature-character')?'크리처':'지역';
    const code=el.querySelector('.code')?.textContent.trim()||el.dataset.code||el.dataset.region||'';
    searchables.push({el,kind,code,label});
  });
