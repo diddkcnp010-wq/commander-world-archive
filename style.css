@@ -262,3 +262,69 @@ details.char>summary:hover img,details.boss-character>summary:hover img,details.
 @media(max-width:900px){section.hero{min-height:480px!important}.hero-orbit{width:460px;right:-160px}.hero-star{right:1%;opacity:.1}}
 @media(max-width:680px){.opening-panel.cinematic-panel{padding:30px 20px!important}.portal-ring{width:90vw}.ring-2{width:68vw}.ring-3{width:47vw}.portal-core{width:120px;height:120px}.portal-core span{font-size:57px}section.hero{min-height:470px!important;padding:33px 23px!important}.hero-small-title{margin:35px 0 10px}.hero h1{font-size:clamp(42px,10vw,68px)!important}.hero p{font-size:13px!important}.hero-orbit{right:-190px;opacity:.55}.hero-star{display:none}.character-lore-panel{padding:13px}.lore-heading h3{font-size:18px}.lore-subgrid{grid-template-columns:1fr}.lore-personality{font-size:13px!important}.opening-chips{gap:6px}.opening-chips span{font-size:10px!important;padding:6px 9px!important}.opening-typing{font-size:10px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.js-animate .reveal:not(.in-view){opacity:1;transform:none}}
+
+/* DUN v12.3: persistent volume mixer */
+.music-volume-control{margin:10px 0 9px;padding:12px;border:1px solid #395071;border-radius:12px;background:linear-gradient(125deg,#101e33,#161a30)}
+.music-volume-control>label{display:flex;justify-content:space-between;align-items:center;color:#b6cce9;font-size:12px;font-weight:700;margin-bottom:7px}
+.music-volume-control>label strong{color:#efdcad;font-variant-numeric:tabular-nums;font-size:12px}
+.music-volume-row{display:flex;align-items:center;gap:10px}
+#music-mute{border:1px solid #51678c;border-radius:9px;background:#21304a;color:#fff;width:38px;height:32px;font-size:16px;cursor:pointer;flex:none}
+#music-mute:hover{background:#304566}
+#music-volume{width:100%;flex:1;accent-color:#d0b47d;cursor:pointer;height:8px;border:0;appearance:none;-webkit-appearance:none;border-radius:20px;outline-offset:4px;background:linear-gradient(90deg,#ceb484 var(--pct,70%),#34425f var(--pct,70%))}
+#music-volume::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:16px;height:16px;border:3px solid #f7ebce;border-radius:50%;background:#ae92c5;box-shadow:0 1px 7px #050a16}
+#music-volume::-moz-range-thumb{width:12px;height:12px;border:3px solid #f7ebce;border-radius:50%;background:#ae92c5}
+#music-volume:focus-visible{outline:2px solid #d4c19c}
+/* Recently added Hunters */
+.new-hunters-collection{margin:24px 0 14px;border-radius:15px;padding:18px;background:linear-gradient(145deg,#15243d,#121b31);border:1px solid #55678d}
+.collection-heading{margin:0 0 16px}
+.collection-heading span{color:#e8c997;font-weight:800;font-size:11px;letter-spacing:1px}
+.collection-heading h3{font-size:22px;color:#f4f2ec;margin:3px 0}
+.collection-heading p{color:#b3c5de;font-size:13px;line-height:1.8;margin:0}
+.new-hunters-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.new-hunter{min-width:0;border:1px solid #4a5d7b;border-radius:12px;background:#101b2f;overflow:hidden;align-self:start}
+.new-hunter summary{cursor:pointer;list-style:none}
+.new-hunter summary::-webkit-details-marker{display:none}
+.new-hunter .atlas-card-thumb{display:flex;align-items:center;gap:10px;padding:13px 12px}
+.new-hunter .atlas-card-thumb>img{width:75px;height:96px;object-fit:cover;flex:none;border:1px solid #657a98;border-radius:7px;background:#0e192d}
+.new-hunter .atlas-card-info{min-width:0;display:flex;flex-direction:column;gap:3px;flex:1}
+.new-hunter .atlas-card-info small{font-size:11px;color:#d7c49b}
+.new-hunter .atlas-card-info strong{font-size:15px;color:#f3f6ff;overflow-wrap:anywhere}
+.new-hunter .atlas-card-info em{font-size:11px;color:#b1c4df;font-style:normal}
+.new-hunter .atlas-arrow{color:#e6d2ad;font-size:19px}
+.new-hunter .char-body{padding:14px;border-top:1px solid #354962;background:#0d192b;color:#d2e2f2;font-size:12px;line-height:1.8}
+.new-hunter .char-body>p{margin:0 0 9px}
+.new-hunter .char-body strong{color:#d4bf90}
+.new-hunter .new-hunter-stat{font-weight:800;color:#e9d6a7}
+.new-hunter-skills{background:#14243a;border:1px solid #374968;border-radius:9px;margin-top:12px;padding:10px}
+.new-hunter-skills h4{margin:0 0 6px;font-size:13px;color:#e8d5b6}
+.new-hunter-skills>div{padding:6px 0;display:grid;grid-template-columns:55px 1fr;border-top:1px solid #2e3f5b;gap:8px}
+.new-hunter-skills>div b{color:#92d3eb}
+/* Region wildlife and minor creature archive */
+.creature-archive{margin-top:24px}
+.creature-count{padding:7px 10px;border:1px solid #638a8c;color:#a9ebe3;border-radius:20px;font-size:11px;font-weight:800;white-space:nowrap}
+.creature-intro{background:linear-gradient(125deg,#112a32,#14203a);border:1px solid #3a7380;border-radius:13px;padding:16px 17px;margin-bottom:15px}
+.creature-intro strong{font-size:16px;color:#d4f5ed}
+.creature-intro p{color:#b8d9df;line-height:1.8;font-size:13px;margin:7px 0 0}
+.creature-region-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.creature-region{min-width:0;align-self:start;border:1px solid #345c69;border-radius:12px;overflow:hidden;background:#102333}
+.creature-region>summary{list-style:none;display:flex;align-items:center;gap:11px;cursor:pointer;padding:14px 13px}
+.creature-region>summary::-webkit-details-marker,.creature-character>summary::-webkit-details-marker{display:none}
+.creature-region>summary>span:nth-child(2){display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.creature-region>summary strong{color:#e4f8f6;font-size:13px;overflow-wrap:anywhere}
+.creature-region>summary small{color:#9bc4cb;font-size:11px}
+.creature-region-icon{display:grid;place-items:center;color:#ccecd7;border-radius:9px;background:#1d4752;width:35px;height:35px;flex:none;font-size:21px}
+.creature-arrow{color:#a7d9d9;font-size:15px}
+.creature-region[open] .creature-arrow{transform:rotate(180deg)}
+.creature-grid{display:grid;gap:9px;background:#0c1929;padding:10px;border-top:1px solid #345c69}
+.creature-character{border:1px solid #365264;border-radius:10px;overflow:hidden;background:#14263a}
+.creature-character>summary{display:flex;align-items:center;gap:9px;list-style:none;cursor:pointer;padding:11px 10px}
+.creature-symbol{font-size:21px;line-height:1;color:#b0e0d3}
+.creature-name{font-weight:800;color:#f0f7fa;font-size:13px;flex:1}
+.creature-tag{background:#273c52;color:#b3dcd7;border-radius:5px;padding:2px 6px;font-size:10px;white-space:nowrap}
+.creature-body{color:#ccdfec;font-size:12px;line-height:1.75;padding:12px;border-top:1px solid #39586f}
+.creature-body p{margin:0 0 10px}
+.creature-stat{color:#f2d9a1;font-weight:800;font-size:12px;background:#192e44;padding:7px 9px;border-radius:7px;margin-bottom:10px}
+.creature-stat span{color:#7993aa}
+.creature-ability b{color:#a7e1e0}
+.creature-body>small{display:block;font-size:11px;color:#8faec4}
+@media(max-width:750px){.creature-region-list,.new-hunters-grid{grid-template-columns:1fr}.new-hunters-collection{padding:13px}.creature-archive .section-title{flex-wrap:wrap}}
