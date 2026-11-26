@@ -298,3 +298,25 @@
  }
  // Folder animations deliberately disabled: avoid forced layout on each toggle.
 })();
+
+/* Creature images are not requested until a visitor explicitly reveals them. */
+(function(){
+ const root=document.getElementById('creatures');if(!root)return;
+ const setPreview=(box,open)=>{
+  const button=box.querySelector('.creature-preview-toggle');
+  const panel=box.querySelector('.creature-preview-content');
+  const media=box.querySelector('.creature-preview-media');
+  const status=box.querySelector('.creature-preview-status');
+  button.setAttribute('aria-expanded',String(open));panel.hidden=!open;
+  button.querySelector('.creature-preview-label strong').textContent=open?'미리보기 숨기기':'미리보기 주의';
+  button.querySelector('.creature-preview-label small').textContent=open?'클릭하여 외형 다시 가리기':'크리처 외형이 공개됩니다 · 클릭하여 보기';
+  if(!open){media.replaceChildren();status.textContent='';return;}
+  const img=new Image();img.alt=box.dataset.name+' 외형';img.decoding='async';
+  status.textContent='이미지를 불러오는 중입니다.';
+  img.addEventListener('load',()=>{if(img.parentNode===media)status.textContent='';},{once:true});
+  img.addEventListener('error',()=>{if(img.parentNode===media){img.remove();status.textContent='이미지를 불러올 수 없습니다. 숨긴 후 다시 열어 주세요.';}},{once:true});
+  media.replaceChildren(img);img.src=box.dataset.image;
+ };
+ root.addEventListener('click',e=>{const b=e.target.closest('.creature-preview-toggle');if(!b||!root.contains(b))return;setPreview(b.closest('.creature-preview'),b.getAttribute('aria-expanded')!=='true');});
+ root.addEventListener('toggle',e=>{const d=e.target;if(!d.matches('details.creature-character,details.creature-region')||d.open)return;d.querySelectorAll('.creature-preview-toggle[aria-expanded="true"]').forEach(b=>setPreview(b.closest('.creature-preview'),false));},true);
+})();
