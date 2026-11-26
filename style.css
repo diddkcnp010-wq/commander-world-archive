@@ -328,3 +328,17 @@ details.char>summary:hover img,details.boss-character>summary:hover img,details.
 .creature-ability b{color:#a7e1e0}
 .creature-body>small{display:block;font-size:11px;color:#8faec4}
 @media(max-width:750px){.creature-region-list,.new-hunters-grid{grid-template-columns:1fr}.new-hunters-collection{padding:13px}.creature-archive .section-title{flex-wrap:wrap}}
+
+/* Character records: the quote is part of the profile, not a separate collection. */
+.character-lore-panel .lore-quote{margin:15px 0 13px;padding:12px 15px 13px;border:1px solid #514760;border-left:3px solid #d6ba82;border-radius:9px;background:linear-gradient(105deg,#252238,#161d32);color:#f4e4c5;text-align:left}
+.character-lore-panel .lore-quote>span{display:block;color:#cbb58d;font-size:10px;font-weight:800;letter-spacing:.08em;margin:0 0 5px}
+.character-lore-panel .lore-quote>p{font-size:14px;font-weight:700;font-style:italic;line-height:1.8;margin:0;color:#f4e4c5;overflow-wrap:anywhere}
+/* Reduce repaint costs without changing archive layout. */
+.topbar{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#0b1425!important}
+.detail-modal::backdrop,.opening-overlay{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.opening-overlay.hidden{display:none!important}
+section.hero::before,.hero-orbit,.hero-star,.hero-scroll-hint span,.brand-emblem,.music-dock.is-playing .music-dock-icon{animation:none!important}
+.opening-overlay .cinematic-grid,.opening-overlay .portal-ring,.opening-overlay .portal-core,.opening-overlay .portal-scan,.opening-overlay .dust{animation-iteration-count:1!important}
+.archive-section,.archive-fold details.root[open]>.root-content,.archive-fold details.group[open]>.group-content{animation:none!important}
+.detail-modal[open]{animation:modalIn .16s ease-out!important}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
