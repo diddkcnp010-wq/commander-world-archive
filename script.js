@@ -21,6 +21,29 @@
   const miniClock=document.getElementById('mini-clock');
   const miniSec=document.getElementById('mini-sec');
   const miniState=document.getElementById('mini-state');
+  const volume=document.getElementById('music-volume');
+  const volumeValue=document.getElementById('music-volume-value');
+  const mute=document.getElementById('music-mute');
+  const clampVolume=n=>Math.max(0,Math.min(100,Math.round(Number(n)||0)));
+  let savedVolume=70;
+  try{const stored=localStorage.getItem('commanderMusicVolume');if(stored!==null)savedVolume=clampVolume(stored)}catch(_){}
+  audio.volume=savedVolume/100;
+  function setVolume(value,remember=true){
+    const n=clampVolume(value);audio.volume=n/100;audio.muted=false;
+    if(volume)volume.value=String(n);
+    if(volumeValue)volumeValue.textContent=n+'%';
+    if(mute){mute.textContent=n===0?'🔇':'🔊';mute.setAttribute('aria-label',n===0?'음악 음소거 해제':'음악 음소거');mute.setAttribute('aria-pressed',String(n===0))}
+    if(volume)volume.style.setProperty('--pct',n+'%');
+    if(remember)try{localStorage.setItem('commanderMusicVolume',String(n))}catch(_){}
+  }
+  setVolume(savedVolume,false);
+  volume?.addEventListener('input',()=>setVolume(volume.value));
+  mute?.addEventListener('click',()=>{
+    if(audio.muted || audio.volume===0){setVolume(savedVolume||70)}
+    else {savedVolume=Math.round(audio.volume*100)||70;setVolume(0)}
+  });
+  volume?.addEventListener('change',()=>{if(Number(volume.value)>0)savedVolume=Number(volume.value)});
+
   let key='hunter', error='';
   const format=s=>{const n=Math.floor(Math.max(0,Number(s)||0));return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')};
   for(const box of boxes){
