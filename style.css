@@ -349,3 +349,32 @@ section.hero::before,.hero-orbit,.hero-star,.hero-scroll-hint span,.brand-emblem
 .lore-profile-facts dt{font-size:11px;font-weight:700;letter-spacing:.04em;color:#cbb68e;margin:0 0 3px}
 .lore-profile-facts dd{font-size:14px;font-weight:700;color:#e9effb;margin:0;line-height:1.5;overflow-wrap:anywhere}
 @media(max-width:480px){.lore-profile-facts{gap:5px}.lore-profile-facts>div{padding:8px 7px}.lore-profile-facts dd{font-size:12px}}
+
+/* Creature archive — concealed artwork and regional lore */
+.creature-record-label{font-size:11px;font-weight:800;letter-spacing:.07em;color:#a8ded3;margin:0 0 7px}
+.creature-description{font-size:14px;color:#e6f1f6;line-height:1.8}
+.creature-habitat{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;padding:8px 10px;border-radius:8px;background:#102335;margin:0 0 12px}
+.creature-habitat span,.creature-facts dt{font-size:11px;color:#9bb8c6}
+.creature-habitat strong{color:#dcefe9;font-size:12px}
+.creature-preview{margin:12px 0;border:1px solid #476572;border-radius:11px;overflow:hidden;background:#0c1a2b}
+.creature-preview-toggle{display:flex;align-items:center;gap:11px;width:100%;border:0;padding:15px 12px;text-align:left;cursor:pointer;background:linear-gradient(125deg,#19333d,#192638);color:#e7f4ef;font:inherit}
+.creature-preview-toggle:hover{background:linear-gradient(125deg,#24434b,#223349)}
+.creature-preview-toggle:focus-visible{outline:2px solid #e4c78e;outline-offset:-3px}
+.creature-preview-lock{display:grid;place-items:center;flex:0 0 40px;height:40px;border:1px solid #6a827d;border-radius:10px;color:#efd4a0;background:#162a32}
+.creature-preview-lock svg{width:22px;height:22px}
+.creature-preview-label{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.creature-preview-label strong{font-size:13px;color:#eed6a6}
+.creature-preview-label small{font-size:11px;color:#a9c0cd;line-height:1.5}
+.creature-preview-arrow{font-size:24px;color:#b0d4ce}
+.creature-preview-content[hidden]{display:none!important}
+.creature-preview-content{padding:10px;border-top:1px solid #45616d}
+.creature-preview-media img{display:block;width:100%;max-height:480px;object-fit:contain;border-radius:8px;background:#091320}
+.creature-preview-status{font-size:11px;color:#a8b8ca;text-align:center;margin:6px 0 0!important}
+.creature-preview-status:empty{display:none}
+.creature-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:12px 0;padding:0}
+.creature-facts>div{min-width:0;padding:8px 6px;background:#192e44;border:1px solid #354c61;border-radius:8px;text-align:center}
+.creature-facts dd{font-weight:800;font-size:16px;color:#f0d9aa;margin:2px 0 0}
+.creature-combat{background:#111e30;border:1px solid #354f63;border-radius:9px;padding:12px;margin:12px 0}
+.creature-combat p{font-size:12px;line-height:1.8;margin:0 0 9px}
+.creature-combat p b{color:#b6e5d9}
+.creature-combat .creature-combat-note{margin:0;font-size:11px;color:#91a8bb}
