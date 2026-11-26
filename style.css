@@ -378,3 +378,18 @@ section.hero::before,.hero-orbit,.hero-star,.hero-scroll-hint span,.brand-emblem
 .creature-combat p{font-size:12px;line-height:1.8;margin:0 0 9px}
 .creature-combat p b{color:#b6e5d9}
 .creature-combat .creature-combat-note{margin:0;font-size:11px;color:#91a8bb}
+
+/* Expanded regional field records */
+.region-lore{margin:10px 0 19px;padding:16px 17px 17px;background:linear-gradient(135deg,#16283e,#111f32);border:1px solid #3f576f;border-left:3px solid #83b6ca;border-radius:11px}
+.region-record-kicker{color:#b2c8da;font-weight:800;font-size:11px;letter-spacing:.08em;margin:0 0 7px}
+.region-lore h3{color:#e7e2d3;font-size:19px;line-height:1.5;margin:0 0 10px;font-weight:800;word-break:keep-all}
+.region-lore p{color:#d9e6f1;font-size:14px;line-height:1.95;margin:0;word-break:keep-all;overflow-wrap:anywhere}
+.region-creature-record{margin:17px 0 3px;padding:13px;background:#102638;border:1px solid #3c626a;border-radius:11px}
+.region-creature-record .region-record-kicker{color:#a9ded1}
+.region-creature-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.region-creature-entry{display:flex;gap:9px;align-items:flex-start;padding:11px 10px;border:1px solid #365968;border-radius:8px;background:#101e2d;min-width:0}
+.region-creature-symbol{color:#b3dfcc;font-size:19px;line-height:1.25}
+.region-creature-entry strong{font-size:13px;color:#e0f1eb;word-break:keep-all}
+.region-creature-entry p{font-size:12px;line-height:1.65;color:#b6cbd7;margin:4px 0 0;word-break:keep-all;overflow-wrap:anywhere}
+.region-encounter-note{font-size:11px;line-height:1.7;color:#a0b7c8;margin:9px 0 0}
+@media(max-width:540px){.region-lore{padding:13px}.region-lore h3{font-size:16px}.region-lore p{font-size:13px}.region-creature-pair{grid-template-columns:1fr}}
